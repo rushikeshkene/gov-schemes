@@ -11,8 +11,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve frontend
-app.use(express.static(path.join(__dirname, "../public")));
+// Serve frontend files from the CURRENT directory (since everything is together now)
+app.use(express.static(__dirname));
 
 // Get all schemes
 app.get("/api/schemes", (req, res) => {
@@ -32,20 +32,15 @@ app.get("/api/schemes/:id", (req, res) => {
 // Handle Feedback/Query Submission
 app.post("/api/feedback", (req, res) => {
   const { name, contact, query } = req.body;
-  console.log("\n==================================");
-  console.log("📝 NEW FEEDBACK RECEIVED");
-  console.log("Name:", name);
-  console.log("Contact:", contact);
-  console.log("Query:", query);
-  console.log("==================================\n");
+  console.log("📝 NEW FEEDBACK:", name, contact, query);
   res.status(200).json({ message: "Feedback submitted successfully." });
 });
 
 // Send index.html for other routes
 app.use((req, res) => {
-  res.sendFile(path.join(__dirname, "../public", "index.html"));
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
 app.listen(PORT, () => {
-  console.log(`✅ Server running on http://localhost:${PORT}`);
+  console.log(`✅ Server running on port ${PORT}`);
 });
