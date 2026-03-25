@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Government Schemes Information App</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-content">
+      <h1 id="pageTitle"><i class="fas fa-landmark"></i> Government Schemes Portal</h1>
+      <p id="pageSubtitle">
+        Search schemes, check your eligibility, and apply directly through verified official websites.
+      </p>
+    </div>
+  </header>
+
+  <section class="container eligibility-section">
+    <div class="eligibility-card">
+      <h2 id="eligibilityTitle"><i class="fas fa-user-check"></i> Check Your Eligibility</h2>
+      <p id="eligibilitySub" class="text-muted">Enter your details to find schemes you qualify for.</p>
+      
+      <form id="eligibilityForm" class="eligibility-grid">
+        <div class="input-group">
+          <label id="lblAge">Age</label>
+          <input type="number" id="elAge" placeholder="e.g. 25" required min="1" max="120">
+        </div>
+        <div class="input-group">
+          <label id="lblGender">Gender</label>
+          <select id="elGender" required>
+            <option value="All">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label id="lblIncome">Annual Income (₹)</label>
+          <input type="number" id="elIncome" placeholder="e.g. 150000" required min="0">
+        </div>
+        <div class="input-group">
+          <label id="lblOccupation">Occupation</label>
+          <select id="elOccupation" required>
+            <option value="Any">Any / General</option>
+            <option value="Student">Student</option>
+            <option value="Farmer">Farmer</option>
+            <option value="Women">Women / Housewife</option>
+            <option value="Senior Citizen">Senior Citizen</option>
+            <option value="Business">Entrepreneur / Business</option>
+            <option value="Unemployed">Unemployed</option>
+          </select>
+        </div>
+        <div class="btn-group">
+          <button type="submit" class="apply-btn check-btn" id="btnCheck"><i class="fas fa-magic"></i> Find Schemes</button>
+          <button type="button" class="reset-btn" id="btnReset" style="display:none;"><i class="fas fa-times"></i> Clear</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <main class="container">
+    <section class="controls">
+      <div class="search-wrapper">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" id="searchInput" placeholder="Search by scheme name (e.g., Fasal Bima)..." />
+        <button id="micBtn" class="mic-btn" title="Search by Voice" onclick="toggleVoiceSearch()">
+          <i class="fas fa-microphone"></i>
+        </button>
+      </div>
+
+      <div class="filter-actions">
+        <select id="categoryFilter">
+          <option value="" id="optAll">All Categories</option>
+          <option value="Farmer" id="optFarmer">Farmer</option>
+          <option value="Employment" id="optEmployment">Business & Employment</option>
+          <option value="Education" id="optEducation">Education & Student</option>
+          <option value="Women" id="optWomen">Women</option>
+          <option value="Health" id="optHealth">Health</option>
+          <option value="Housing" id="optHousing">Housing</option>
+          <option value="Social Welfare" id="optWelfare">Social Welfare</option>
+        </select>
+        <button id="langToggle" class="toggle-btn primary">मराठी</button>
+      </div>
+    </section>
+
+    <!-- Smart Eligibility Result Alert -->
+    <div id="resultAlert" class="result-alert hidden">
+      <i class="fas fa-info-circle"></i> <span id="resultText"></span>
+    </div>
+
+    <div id="loadingIndicator" class="loader hidden"></div>
+    <section id="schemeList" class="scheme-grid"></section>
+  </main>
+
+  <section class="container feedback-section">
+    <div class="feedback-card">
+      <h2 id="feedbackTitle"><i class="fas fa-comment-dots"></i> Have a Query or Suggestion?</h2>
+      <form id="feedbackForm">
+        <input type="text" id="fbName" placeholder="Your Name" required>
+        <input type="text" id="fbContact" placeholder="Email or Mobile No." required>
+        <textarea id="fbQuery" rows="3" placeholder="Write your question, complaint or feedback here..." required></textarea>
+        <button type="submit" class="apply-btn" id="btnSubmitFeedback"><i class="fas fa-paper-plane"></i> Submit</button>
+      </form>
+    </div>
+  </section>
+
+  <div id="detailsModal" class="modal hidden">
+    <div class="modal-content">
+      <button id="closeModal" class="close-btn"><i class="fas fa-times"></i></button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <div id="toastContainer" class="toast hidden"></div>
+  <script src="script.js"></script>
+</body>
+</html>
