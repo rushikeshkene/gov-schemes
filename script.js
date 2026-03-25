@@ -15,9 +15,10 @@ let currentLang = "en";
 let activeFilter = null;
 
 // Ensure we fetch from Node.js backend on Port 5000, NOT Live Server port.
-const API_URL = (window.location.protocol === "file:" || window.location.port !== "5000") 
-    ? "http://localhost:5000/api/schemes" 
-    : "/api/schemes";
+// PASTE THIS NEW CODE
+const isLiveServer = window.location.protocol === "file:" || window.location.port === "5500";
+const API_URL = isLiveServer ? "http://localhost:5000/api/schemes" : "/api/schemes";
+const FEEDBACK_URL = isLiveServer ? "http://localhost:5000/api/feedback" : "/api/feedback";
 
 function getText(en, mr) {
   return currentLang === "mr" ? (mr || en || "माहिती उपलब्ध नाही") : (en || "Details not available");
